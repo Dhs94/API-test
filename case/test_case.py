@@ -2,7 +2,7 @@ import requests
 import unittest
 import ddt
 from case.login_wdms import Login
-
+from common.mock_test import mock_test
 
 class Test(unittest.TestCase):
 
@@ -84,7 +84,10 @@ class Test(unittest.TestCase):
         u"""成功添加区域"""
         data = {"Data": [{"zoneNumber": 11, "zoneName": "11"}]}
         self.zones_num = [11]
+        # self.wdms.create_zone = mock.Mock(return_value={"zoneNumber": 11, "zoneName": "11"})
+        # res = mock_test(self.wdms.create_zone, data, 'test mock')
         res = self.wdms.create_zone(data=data)
+        print(res)
         self.assertEqual(res['message'], 'Succeed')
         self.assertEqual(res['code'], 200)
 
